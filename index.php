@@ -1,14 +1,5 @@
 <?php
-$host = 'localhost';
-$db   = 'comercial';
-$user = 'tacweb';
-$pass = 'nac456*Lx2hhhgdsdswfhhhIUYTYHJGBvRFC639347tk987365378237';
-
-$conn = new mysqli($host, $user, $pass, $db);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include'config.php';
 
 // Atualizar a contagem de cliques na mesma linha e registrar a data/hora
 $sql = "INSERT INTO cliques (id, total_cliques, data_hora) VALUES (1, 1, NOW()) 
@@ -54,7 +45,17 @@ $resultservico = $conn->query($sqlservico);
 $sqladm = "SELECT nome_usuario, foto_perfil FROM adm LIMIT 6";
 $resultadm = $conn->query($sqladm);
 
+$sqlimgsobre = "SELECT imagem FROM imgsobre ORDER BY created_at DESC LIMIT 2";
+$resultimgsobre = $conn->query($sqlimgsobre);
 
+$imagenssobre = [];
+if ($resultimgsobre->num_rows > 0) {
+    while ($rowimgsobre = $resultimgsobre->fetch_assoc()) {
+        $imagenssobre[] = htmlspecialchars($rowimgsobre['imagem']);
+    }
+} else {
+    echo "Nenhuma imagem encontrada.";
+}
 
 
 ?>
@@ -64,7 +65,7 @@ $resultadm = $conn->query($sqladm);
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>RLSA comercial</title>
+        <title>RSLA comercial</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
@@ -96,88 +97,7 @@ $resultadm = $conn->query($sqladm);
         </div>
     </div>
     <!-- Preloader Start -->
-    <header>
-        <!-- Header Start -->
-       <div class="header-area header-transparent">
-            <div class="main-header ">
-                <div class="header-top d-none d-lg-block">
-                   <div class="container-fluid">
-                       <div class="col-xl-12">
-                            <div class="row d-flex justify-content-between align-items-center">
-                                <div class="header-info-left">
-                                    <ul>     
-                                        <li>+(123) 1234-567-8901</li>
-                                        <li>info@domain.com</li>
-                                        <li>Mon - Sat 8:00 - 17:30, Sunday - CLOSED</li>
-                                    </ul>
-                                </div>
-                                <div class="header-info-right">
-                                    <ul class="header-social">    
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                       <li> <a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                       </div>
-                   </div>
-                </div>
-               <div class="header-bottom  header-sticky">
-                    <div class="container-fluid">
-                        <div class="row align-items-center">
-                            <!-- Logo -->
-                            <div class="col-xl-2 col-lg-2 col-md-1">
-                                <div class="logo">
-                                    <!-- logo-1 -->
-                                    <a href="index.php" class="big-logo"><img src="assets/img/logo/logo.png" alt=""></a>
-                                    <!-- logo-2 -->
-                                    <a href="index.php" class="small-logo"><img src="assets/img/logo/loder-logo.png" alt=""></a>
-                                </div>
-                            </div>
-                            <div class="col-xl-8 col-lg-8 col-md-8">
-                                <!-- Main-menu -->
-                                <div class="main-menu f-right d-none d-lg-block">
-                                    <nav> 
-                                        <ul id="navigation">                                                                                                                   
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="project.html">Projects</a></li>
-                                            <li><a href="services.html">Services</a></li>
-                                            <li><a href="blog.html">Blog</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="single-blog.html">Blog Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Pages</a>
-                                                <ul class="submenu">
-                                                    <li><a href="elements.html">Element</a></li>
-                                                    <li><a href="project_details.html">Projects Details</a></li>
-                                                    <li><a href="services_details.html">Services Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.php">Contact</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>             
-                            <div class="col-xl-2 col-lg-2 col-md-3">
-                                <div class="header-right-btn f-right d-none d-lg-block">
-                                    <a href="#" class="btn">Contact Now</a>
-                                </div>
-                            </div>
-                            <!-- Mobile Menu -->
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
-                            </div>
-                        </div>
-                    </div>
-               </div>
-            </div>
-       </div>
-        <!-- Header End -->
-    </header>
+    <?php include'cabecalho.php'; ?>
     <main>
 
         <!-- slider Area Start-->
@@ -189,7 +109,7 @@ $resultadm = $conn->query($sqladm);
                             <div class="col-lg-11">
                                 <div class="hero__caption">
                                     <div class="hero-text1">
-                                        <span data-animation="fadeInUp" data-delay=".3s">hand car wash and detailing service</span>
+                                        <span data-animation="fadeInUp" data-delay=".3s">Nossa missão é satisfazer sua necessidade</span>
                                     </div>
                                     <h1 data-animation="fadeInUp" data-delay=".5s"><?php echo htmlspecialchars($nome_empresa);?></h1>
                                     <div class="stock-text" data-animation="fadeInUp" data-delay=".8s">
@@ -212,7 +132,7 @@ $resultadm = $conn->query($sqladm);
                                     <div class="hero-text1">
                                         <span data-animation="fadeInUp" data-delay=".3s">hand car wash and detailing service</span>
                                     </div>
-                                    <h1 data-animation="fadeInUp" data-delay=".5s">advanced</h1>
+                                    <h1 data-animation="fadeInUp" data-delay=".5s">RSLA</h1>
                                     <div class="stock-text" data-animation="fadeInUp" data-delay=".8s">
                                         <h2>Comercial</h2>
                                         <h2>Comercial</h2>
@@ -229,46 +149,7 @@ $resultadm = $conn->query($sqladm);
         </div>
         <!-- slider Area End-->
         <!-- Services Area Start -->
-        <div class="services-area1 section-padding30">
-            <div class="container">
-                <!-- section tittle -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-tittle mb-55">
-                            <div class="front-text">
-                                <h2 class="">Nossos Serviços</h2>
-                            </div>
-                            <span class="back-text">Serviços</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <?php
-
-
-              #  if ($resultservico->num_rows > 0) {
-              #      while ($rowservico = $resultservico->fetch_assoc()) {
-              #     echo ' <div class="col-xl-4 col-lg-4 col-md-6">';
-               #       echo '  <div class="single-service-cap mb-30">';
-                #          echo '  <div class="service-img">';
-                 #       echo '        <img src="./Dashboard/' . htmlspecialchars($rowservico["imagem"]) . '" alt="">';
-                  #     echo '     </div>';
-                   #   echo '      <div class="service-cap">';
-                    #  echo '          <h4><a href="services_details.html">' . htmlspecialchars($rowservico["titulo"]). '</h4>';
-                     # echo '          <a href="services_details.html" class="more-btn">Ler Mais <i class="ti-plus"></i></a>';
-                      #echo '      </div>';
-                    #  echo '      <div class="service-icon">';
-                     # echo '          <img src="assets/img/icon/services_icon1.png" alt="">';
-                      #echo '      </div>';
-                   #   echo '  </div>';
-                   #echo ' </div>';
-                 #}
-               # } else {
-                #    echo "Nenhum projeto encontrado.";
-                #}?>
-                </div>
-            </div>
-        </div>
+        
         <!-- Services Area End -->
         <!-- About Area Start -->
         <section class="support-company-area fix pt-10">
@@ -282,7 +163,7 @@ $resultadm = $conn->query($sqladm);
                         <span class="back-text">Quem somos</span>
                     </div>
                     <div class="support-caption">
-                        <p class="pera-top">Compromisso da RLSA Comercial com o Mercado Imobiliário</p>
+                        <p class="pera-top">Compromisso da RSLA Comercial com o Mercado Imobiliário</p>
                         <p><?php echo nl2br(htmlspecialchars($sobre)); ?></p>
                         <a href="about.html" class="btn red-btn2">Ler Mais</a>
                     </div>
@@ -290,7 +171,12 @@ $resultadm = $conn->query($sqladm);
                 <div class="right-content">
                     <!-- img -->
                     <div class="right-img">
-                        <img src="assets/img/gallery/safe_in.png" alt="">
+                        <?php
+                    if (isset($imagenssobre[1])): ?>
+                        <img src="<?php echo './Dashboard/' . $imagenssobre[1]; ?>"
+                            class="img-fluid w-75 rounded" alt="" style="margin-bottom: 25%;">
+                        <?php endif; ?>
+                        
                     </div>
                     <div class="support-img-cap text-center">
                         <span>1994</span>
@@ -458,7 +344,7 @@ if ($resultadm->num_rows > 0) {
     echo ' </div>
                             <div class="team-caption">
                                 <span>'.htmlspecialchars($rowadm["nome_usuario"]) .'</span>
-                                <h3>Atual Dono da RLSA</h3>';
+                                <h3>Atual Dono da RSLA</h3>';
 }
 ?>
 
@@ -501,12 +387,12 @@ if ($resultadm->num_rows > 0) {
                                         <path fill-rule="evenodd"  stroke-width="1px" stroke="rgb(255, 95, 19)" fill-opacity="0" fill="rgb(0, 0, 0)"
                                         d="M82.623,59.861 L48.661,59.861 L48.661,25.988 L59.982,3.406 L76.963,3.406 L65.642,25.988 L82.623,25.988 L82.623,59.861 ZM3.377,25.988 L14.698,3.406 L31.679,3.406 L20.358,25.988 L37.340,25.988 L37.340,59.861 L3.377,59.861 L3.377,25.988 Z"/>
                                         </svg>
-                                        <p>"A RLSA Comercial é reconhecida por sua experiência em imóveis e engenharia. Com uma equipe de especialistas e um portfólio diversificado, a empresa oferece soluções que atendem aos mais altos padrões de qualidade e inovação. Desde a consultoria personalizada até a execução de grandes projetos, cada detalhe é pensado para garantir um espaço que não só atenda às necessidades dos clientes, mas que também respeite e valorize o ambiente ao redor."</p>
+                                        <p>"A RSLA Comercial é reconhecida por sua experiência em imóveis e engenharia. Com uma equipe de especialistas e um portfólio diversificado, a empresa oferece soluções que atendem aos mais altos padrões de qualidade e inovação. Desde a consultoria personalizada até a execução de grandes projetos, cada detalhe é pensado para garantir um espaço que não só atenda às necessidades dos clientes, mas que também respeite e valorize o ambiente ao redor."</p>
                                     </div>
                                     <!-- founder -->
                                     <div class="testimonial-founder d-flex align-items-center">
                                        <div class="founder-text">
-                                            <span>RLSA Comercial</span>
+                                            <span>RSLA Comercial</span>
                                             <p>Imóveis e Engenharia</p>
                                        </div>
                                     </div>
@@ -527,184 +413,47 @@ if ($resultadm->num_rows > 0) {
                         <!-- Section Tittle -->
                         <div class="section-tittle section-tittle7 mb-50">
                             <div class="front-text">
-                                <h2 class="">latest news</h2>
+                                <h2 class="">Oque fazemos?</h2>
                             </div>
-                            <span class="back-text">Our Blog</span>
+                            <span class="back-text">Trabalhos</span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-6">
+
+                <div class="col-xl-6 col-lg-6 col-md-6">
                         <!-- single-news -->
                         <div class="single-news mb-30">
                             <div class="news-img">
-                                <img src="assets/img/david/david_1.png" alt="">
+                                <img src="assets/img/david/david_3.jpg" alt="">
                                 <div class="news-date text-center">
-                                    <span>24</span>
-                                    <p>Now</p>
+                                    <span>2024/2025</span>
+                                    <p>Agora o tempo é seu</p>
                                 </div>
                             </div>
                             <div class="news-caption">
                                 <ul class="david-info">
-                                    <li> | &nbsp; &nbsp;  Porperties</li>
+                                    <li> | &nbsp; &nbsp;  925-880-402</li>
                                 </ul>
-                                <h2><a href="single-blog.html">Footprints in Time is perfect
-                                    House in Kurashiki</a></h2>
-                                <a href="single-blog.html" class="d-btn">Read more »</a>
+                                <h2><a href="single-blog.html">Construção civil</a></h2>
+                                <h2><a href="single-blog.html">Sistemas Informáticos</a></h2>
+                                <h2><a href="single-blog.html">Habilitação documentar</a></h2>
+                                <h2><a href="single-blog.html">Advogacia</a></h2>
+                                <h2><a href="single-blog.html">Infantários!</a></h2>
+
+
+
+
+                                <a href="single-blog.html" class="d-btn">Ler mais » </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6">
-                        <!-- single-news -->
-                        <div class="single-news mb-30">
-                            <div class="news-img">
-                                <img src="assets/img/david/david_2.png" alt="">
-                                <div class="news-date text-center">
-                                    <span>24</span>
-                                    <p>Now</p>
-                                </div>
-                            </div>
-                            <div class="news-caption">
-                                <ul class="david-info">
-                                    <li> | &nbsp; &nbsp;  Porperties</li>
-                                </ul>
-                                <h2><a href="single-blog.html">Footprints in Time is perfect
-                                    House in Kurashiki</a></h2>
-                                <a href="single-blog.html" class="d-btn">Read more » </a>
-                            </div>
-                        </div>
-                    </div>
+                 
+                   
                </div>
             </div>
         </div>
         <!--latest News Area End -->
 
     </main>
-    <footer>
-        <!-- Footer Start-->
-        <div class="footer-main">
-                <div class="footer-area footer-padding">
-                    <div class="container">
-                        <div class="row  justify-content-between">
-                            <div class="col-lg-4 col-md-4 col-sm-8">
-                                <div class="single-footer-caption mb-30">
-                                    <!-- logo -->
-                                    <div class="footer-logo">
-                                        <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                                    </div>
-                                    <div class="footer-tittle">
-                                        <div class="footer-pera">
-                                            <p class="info1">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-4 col-sm-5">
-                                <div class="single-footer-caption mb-50">
-                                    <div class="footer-tittle">
-                                        <h4>Quick Links</h4>
-                                        <ul>
-                                            <li><a href="#">About</a></li>
-                                            <li><a href="#">Services</a></li>
-                                            <li><a href="#">Projects</a></li>
-                                            <li><a href="#">Contact Us</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-7">
-                                <div class="single-footer-caption mb-50">
-                                    <div class="footer-tittle">
-                                        <h4>Contact</h4>
-                                        <div class="footer-pera">
-                                            <p class="info1">198 West 21th Street, Suite 721 New York,NY 10010</p>
-                                        </div>
-                                        <ul>
-                                            <li><a href="#">Phone: +95 (0) 123 456 789</a></li>
-                                            <li><a href="#">Cell: +95 (0) 123 456 789</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-8">
-                                <div class="single-footer-caption mb-50">
-                                    <!-- Form -->
-                                    <div class="footer-form">
-                                        <div id="mc_embed_signup">
-                                            <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part" novalidate="true">
-                                                <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address " class="placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = ' Email Address '">
-                                                <div class="form-icon">
-                                                    <button type="submit" name="submit" id="newsletter-submit" class="email_icon newsletter-submit button-contactForm">
-                                                        SIGN UP
-                                                    </button>
-                                                </div>
-                                                <div class="mt-10 info"></div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- Map -->
-                                    <div class="map-footer">
-                                        <img src="assets/img/gallery/map-footer.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Copy-Right -->
-                        <div class="row align-items-center">
-                            <div class="col-xl-12 ">
-                                <div class="footer-copy-right">
-                                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
-        <!-- Footer End-->
-    </footer>
-   
-	<!-- JS here -->
-	
-		<!-- All JS Custom Plugins Link Here here -->
-        <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-		<!-- Jquery, Popper, Bootstrap -->
-		<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="./assets/js/popper.min.js"></script>
-        <script src="./assets/js/bootstrap.min.js"></script>
-	    <!-- Jquery Mobile Menu -->
-        <script src="./assets/js/jquery.slicknav.min.js"></script>
-
-		<!-- Jquery Slick , Owl-Carousel Plugins -->
-        <script src="./assets/js/owl.carousel.min.js"></script>
-        <script src="./assets/js/slick.min.js"></script>
-        <!-- Date Picker -->
-        <script src="./assets/js/gijgo.min.js"></script>
-		<!-- One Page, Animated-HeadLin -->
-        <script src="./assets/js/wow.min.js"></script>
-		<script src="./assets/js/animated.headline.js"></script>
-        <script src="./assets/js/jquery.magnific-popup.js"></script>
-
-		<!-- Scrollup, nice-select, sticky -->
-        <script src="./assets/js/jquery.scrollUp.min.js"></script>
-        <script src="./assets/js/jquery.nice-select.min.js"></script>
-		<script src="./assets/js/jquery.sticky.js"></script>
-               
-        <!-- counter , waypoint -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
-        <script src="./assets/js/jquery.counterup.min.js"></script>
-
-        <!-- contact js -->
-        <script src="./assets/js/contact.js"></script>
-        <script src="./assets/js/jquery.form.js"></script>
-        <script src="./assets/js/jquery.validate.min.js"></script>
-        <script src="./assets/js/mail-script.js"></script>
-        <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-        
-		<!-- Jquery Plugins, main Jquery -->	
-        <script src="./assets/js/plugins.js"></script>
-        <script src="./assets/js/main.js"></script>
-        
-    </body>
-</html>
+  <?php include'rodape.php';?>

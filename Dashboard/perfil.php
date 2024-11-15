@@ -103,7 +103,7 @@ include "cabecalho.php";
                 <div class="card">
                     <div class="card-body">
                         <div class="media align-items-center mb-4">
-                            <img class="mr-3" src="<?php echo $logotipo; ?>" width="80" height="80"
+                            <img class="mr-3" src="<?php echo $logotipo; ?>" 
                                 alt="Logotipo da Empresa">
                             <div class="media-body">
                                 <h3 class="mb-0"><?php echo $nome_empresa; ?></h3>

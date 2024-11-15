@@ -155,7 +155,7 @@ include "cabecalho.php";
                 <div class="card">
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="<?php echo $logotipo; ?>" width="80" height="80" class="rounded-circle" alt="">
+                            <img src="<?php echo $logotipo; ?>" alt="">
                             <h5 class="mt-3 mb-1"><?php echo $nome_empresa;?></h5>
                             <p class="m-0"></p>
                             <a href="https://localhost/tac/public/index.php" class="btn btn-sm btn-warning">Ir para o
@@ -223,7 +223,7 @@ include "cabecalho.php";
                         <h4 class="card-title mb-0">Localização</h4>
                         <div style="height: 470px;">
                             <iframe class="rounded w-100 h-100"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d492.70992807218823!2d13.206675047206144!3d-8.909365254520099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1a51f51d1391b9ed%3A0x4f0154020f57ca8d!2sCentro%20de%20Log%C3%ADstica%20Talatona!5e0!3m2!1spt-PT!2sao!4v1726232140947!5m2!1spt-PT!2sao"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30841.9056771603!2d13.509835026002595!3d-14.923816224812459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ba34b10ff7e7f45%3A0xb7389c5e127c5216!2sCristo%20Rei%2C%20Lubango!5e0!3m2!1spt-PT!2sao!4v1731684203106!5m2!1spt-PT!2sao"
                                 style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
